@@ -22,12 +22,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
+        'surname',
+        'image',
         'location',
         'phone',
         'about',
         'password_confirmation',
-        'type',
-        'surname'
     ];
 
     /**
@@ -52,6 +53,15 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function getImageURL()
+    {
+        if($this->image) {
+            return url('storage/'. $this->image);
+        }
+        return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={$this->name}";
+
     }
 
 }

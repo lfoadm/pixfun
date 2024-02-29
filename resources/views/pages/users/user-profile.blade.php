@@ -14,7 +14,8 @@
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
+                            <img src="{{ auth()->user()->getImageURL() }}" alt="profile_image"
+                            {{-- <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image" --}}
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
@@ -87,9 +88,17 @@
                                     </div>
                                 </div>
                         @endif
-                        <form method='POST' action='{{ route('user-profile') }}'>
+                        <form method='POST' action='{{ route('user-profile') }}' enctype="multipart/form-data">
                             @csrf
                             <div class="row">
+
+                                <div class="mb-3 col-md-12">
+                                    <label class="form-label">Atualizar foto do perfil</label>
+                                    <input type="file" name="image" class="form-control border border-2 p-2" value='{{ old('image', auth()->user()->image) }}'>
+                                    @error('image')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
+                                </div>
                                 
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">E-mail</label>

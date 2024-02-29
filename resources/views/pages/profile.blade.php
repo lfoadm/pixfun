@@ -13,7 +13,8 @@
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
+                            <img src="{{ auth()->user()->getImageURL() }}" alt="profile_image"
+                            {{-- <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image" --}}
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
